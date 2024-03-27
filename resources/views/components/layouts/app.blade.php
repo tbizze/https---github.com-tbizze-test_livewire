@@ -1,40 +1,79 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" >
+{{-- dark light cupcake data-theme="esmerald" --}}
 
-        <title>{{ $title ?? 'Page Title' }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>{{ $title ?? 'Page Title' }}</title>
 
-        <!-- Styles -->
-        @livewireStyles
-    </head>
-    <body >
-        <x-banner />
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+    
+</head>
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
+<body class="font-sans antialiased">
+    {{-- The navbar with `sticky` and `full-width` --}}
+    <x-mary-nav full-width class="">
+ 
+        <x-slot:brand>
+            {{-- Drawer toggle for "main-drawer" --}}
+            <label for="main-drawer" class="lg:hidden mr-3">
+                <x-mary-icon name="o-bars-3" class="cursor-pointer" />
+            </label>
+ 
+            {{-- Brand --}}
+            <img src="{{asset('imgs/logo.png')}}" class=" h-14" alt="logo" />
+        </x-slot:brand>
+ 
+        {{-- Right side actions --}}
+        <x-slot:actions>
+            <x-mary-button label="Messages" icon="o-envelope" link="###" class="btn-ghost btn-sm" responsive />
+            <x-mary-button label="Notifications" icon="o-bell" link="###" class="btn-ghost btn-sm" responsive />
+        </x-slot:actions>
+    </x-mary-nav>
+
+    {{-- The main content with `full-width` --}}
+    <x-mary-main full-width>
+ 
+        {{-- This is a sidebar that works also as a drawer on small screens --}}
+        {{-- Notice the `main-drawer` reference here --}}
+        {{-- <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-200 h-screen"> --}}
+        <x-slot:sidebar drawer="main-drawer" collapsible  class="bg-base-200">
+ 
+            {{-- User --}}
+            @if($user = auth()->user())
+                <x-mary-list-item :item="$user" value="name" sub-value="email" no-separator no-hover class="pt-2">
+                    <x-slot:actions>
+                        <x-mary-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff" no-wire-navigate link="/logout" />
+                    </x-slot:actions>
+                </x-mary-list-item>
+ 
+                <x-mary-menu-separator />
             @endif
+ 
+            {{-- Activates the menu item when a route matches the `link` property --}}
+            <x-mary-menu activate-by-route>
+                <x-mary-menu-item title="Home" icon="o-home" link="/dashboard" />
+                <x-mary-menu-item title="Categories" icon="o-document" :link="route('categories')" wire:navigate />
+                <x-mary-menu-item title="Posts" icon="o-document" :link="route('posts')" wire:navigate.hover />
+                <x-mary-menu-sub title="Settings" icon="o-cog-6-tooth">
+                    <x-mary-menu-item title="Wifi" icon="o-wifi" link="####" />
+                    <x-mary-menu-item title="Archives" icon="o-archive-box" link="####" />
+                </x-mary-menu-sub>
+            </x-mary-menu>
+        </x-slot:sidebar>
+ 
+        {{-- The `$slot` goes here --}}
+        <x-slot:content>
+            {{ $slot }}
+        </x-slot:content>
+    </x-mary-main>
+ 
+    {{--  TOAST area --}}
+    <x-mary-toast />
+</body>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-
-        @stack('modals')
-
-        @livewireScripts
-    </body>
 </html>

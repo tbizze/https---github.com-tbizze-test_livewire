@@ -1,6 +1,8 @@
 <?php
 
+use App\Livewire\CategoryIndex;
 use App\Livewire\Counter;
+use App\Livewire\PostIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,15 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/posts', PostIndex::class)->name('posts');
+    Route::get('/categories', CategoryIndex::class)->name('categories');
 });
 
 Route::get('/test', Counter::class);
+
+Route::get('/ver', function () {
+    $dados = \App\Models\Post::all();
+    dd($dados->toArray());
+    //return view('welcome');
+});
