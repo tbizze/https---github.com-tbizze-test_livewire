@@ -22,6 +22,7 @@ class FaturaFactory extends Factory
         $tp_pgto = $this->faker->numberBetween(1,5);
 
         $dt_venc = $this->faker->dateTimeBetween('-5 month','now');
+        $codigo = $dt_venc->format('m/Y');
 
         if ($status == 3){
             $valor_pgto = $val_fatura;
@@ -53,10 +54,11 @@ class FaturaFactory extends Factory
             'dt_pgto'=> $dt_pgto, 
             'valor_fatura'=> $val_fatura,
             'valor_pgto'=> $valor_pgto,
+            'codigo'=> $codigo,
             'notas'=> $this->faker->sentence(),
 
             'fatura_emissora_id'=> $this->faker->numberBetween(1,3),
-            'pgto_forma_id'=> $tp_pgto,
+            'pgto_tipo_id'=> $tp_pgto,
             'status_id'=> $status,
         ];
     }

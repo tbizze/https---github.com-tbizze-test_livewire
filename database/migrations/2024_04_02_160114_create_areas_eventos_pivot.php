@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pgto_formas', function (Blueprint $table) {
+        Schema::create('areas_eventos_pivot', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('notas')->nullable();
-            $table->boolean('ativo')->default(true);
-            // Data de criação e de edição.
+            // Chave estrangeira: Eventos.
+            $table->foreignId('evento_id')->references('id')->on('eventos');
+            // Chave estrangeira: Áreas de eventos.
+            $table->foreignId('evento_area_id')->references('id')->on('evento_areas');
+
             $table->timestamps();
-            // Recurso SoftDelete = excluir p/ lixeira.
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pgto_formas');
+        Schema::dropIfExists('areas_eventos_pivot');
     }
 };

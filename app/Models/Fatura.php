@@ -21,7 +21,7 @@ class Fatura extends Model
      * Lista de campos com persistência no BD. 
      */
     protected $fillable = [
-        'dt_venc', 'dt_pgto', 'valor_fatura', 'valor_pgto', 'notas', 'fatura_emissora_id', 'pgto_forma_id', 'status_id'
+        'dt_venc', 'dt_pgto', 'valor_fatura', 'valor_pgto', 'codigo', 'notas', 'fatura_emissora_id', 'pgto_tipo_id', 'status_id'
     ];
 
     /**
@@ -48,5 +48,32 @@ class Fatura extends Model
     public function toFaturaEmissora(): BelongsTo
     {
         return $this->belongsTo(FaturaEmissora::class,'fatura_emissora_id');
+    }
+
+    /**
+     * RELACIONAMENTO: A Fatura 'pertence a uma' PgtoTipo. 
+     * Obtenha esse registro.
+     */
+    public function toPgtoTipo(): BelongsTo
+    {
+        return $this->belongsTo(PgtoTipo::class,'pgto_tipo_id');
+    }
+
+    /**
+     * RELACIONAMENTO: A Fatura 'pertence a uma' Status. 
+     * Obtenha esse registro.
+     */
+    public function toStatus(): BelongsTo
+    {
+        return $this->belongsTo(Status::class,'status_id');
+    }
+
+    /**
+     * A Fatura 'tem muitos' (hasMany) FaturaItems.
+     * Obtenha essa coleção de registros.
+     */
+    public function hasFaturaItems(): HasMany
+    {
+        return $this->hasMany(FaturaItem::class);
     }
 }

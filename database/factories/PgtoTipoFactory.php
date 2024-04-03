@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PgtoForma>
  */
-class PgtoFormaFactory extends Factory
+class PgtoTipoFactory extends Factory
 {
     /**
      * Define the model's default state.

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('dt_pgto')->nullable();
             $table->decimal('valor_fatura')->nullable();
             $table->decimal('valor_pgto')->nullable();
+            $table->string('codigo')->nullable();
             $table->string('notas')->nullable();
             // Data de criação e de edição.
             $table->timestamps();
@@ -24,7 +25,7 @@ return new class extends Migration
             $table->softDeletes();
             // Chave estrangeira.
             $table->foreignId('fatura_emissora_id')->constrained();
-            $table->foreignId('pgto_forma_id')->nullable()->constrained();
+            $table->foreignId('pgto_tipo_id')->nullable()->constrained();
             $table->foreignId('status_id')->constrained();
         });
     }
@@ -37,7 +38,7 @@ return new class extends Migration
         // Remove a chave estrangeira
         Schema::table('faturas', function (Blueprint $table) {
             $table->dropForeign(['fatura_emissora_id']);
-            $table->dropForeign(['pgto_forma_id']);
+            $table->dropForeign(['pgto_tipo_id']);
             $table->dropForeign(['status_id']);
         });
 

@@ -30,7 +30,8 @@ class MovimentoFactory extends Factory
             'historico'=> $this->faker->sentence(3),
             'notas'=> $this->faker->sentence,
             
-            'movimento_grupo_id' => $this->faker->numberBetween(1, 4), 
+            'movimento_grupo_id' => $this->faker->numberBetween(1, 4),
+            'pgto_tipo_id' => $this->faker->numberBetween(1, 5),
         ];
     }
 }

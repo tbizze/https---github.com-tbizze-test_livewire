@@ -2,6 +2,17 @@
 
 use App\Livewire\CategoryIndex;
 use App\Livewire\Counter;
+use App\Livewire\DashboardIndex;
+use App\Livewire\Event\EventoAreaIndex;
+use App\Livewire\Event\EventoGrupoIndex;
+use App\Livewire\Event\EventoLocalIndex;
+use App\Livewire\Finance\FaturaEmissoraIndex;
+use App\Livewire\Finance\FaturaGrupoIndex;
+use App\Livewire\Finance\FaturaIndex;
+use App\Livewire\Finance\MovimentoGrupoIndex;
+use App\Livewire\Finance\MovimentoIndex;
+use App\Livewire\Finance\PgtoTipoIndex;
+use App\Livewire\Finance\StatusIndex;
 use App\Livewire\PostIndex;
 use Illuminate\Support\Facades\Route;
 
@@ -25,18 +36,33 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    /* Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('dashboard'); */
+
+    Route::get('/dashboard', DashboardIndex::class)->name('dashboard');
 
     Route::get('/posts', PostIndex::class)->name('posts');
     Route::get('/categories', CategoryIndex::class)->name('categories');
+
+    Route::get('/fatura/emissoras', FaturaEmissoraIndex::class)->name('fatura.emissoras');
+    Route::get('/fatura/grupos', FaturaGrupoIndex::class)->name('fatura.grupos');
+    Route::get('/movimento/grupos', MovimentoGrupoIndex::class)->name('movimento.grupos');
+    Route::get('/admin/status', StatusIndex::class)->name('admin.status');
+    Route::get('/admin/pgto_tipos', PgtoTipoIndex::class)->name('admin.pgto_tipos');
+    
+    Route::get('/movimentos', MovimentoIndex::class)->name('movimentos');
+    Route::get('/faturas', FaturaIndex::class)->name('faturas');
+
+    Route::get('/evento/grupos', EventoGrupoIndex::class)->name('evento.grupos');
+    Route::get('/evento/areas', EventoAreaIndex::class)->name('evento.areas');
+    Route::get('/evento/locals', EventoLocalIndex::class)->name('evento.locals');
 });
 
-Route::get('/test', Counter::class);
+//Route::get('/test', Counter::class);
 
-Route::get('/ver', function () {
+/* Route::get('/ver', function () {
     $dados = \App\Models\Post::all();
     dd($dados->toArray());
     //return view('welcome');
-});
+}); */

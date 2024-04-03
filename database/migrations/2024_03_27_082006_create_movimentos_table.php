@@ -24,6 +24,7 @@ return new class extends Migration
             $table->softDeletes();
             // Chave estrangeira.
             $table->foreignId('movimento_grupo_id')->constrained();
+            $table->foreignId('pgto_tipo_id')->constrained();
         });
     }
 
@@ -35,6 +36,7 @@ return new class extends Migration
         // Remove a chave estrangeira
         Schema::table('movimentos', function (Blueprint $table) {
             $table->dropForeign(['movimento_grupo_id']);
+            $table->dropForeign(['pgto_tipo_id']);
         });
 
         Schema::dropIfExists('movimentos');

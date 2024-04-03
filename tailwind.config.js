@@ -27,6 +27,6 @@ export default {
 	],
 	// Temas for Daisy UI
 	daisyui: {
-		themes: ["fantasy", "dark", "cupcake"],
+		themes: ["emerald", "dark", "cupcake"],
 	  },
 };

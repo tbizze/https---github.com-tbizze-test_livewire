@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PgtoForma extends Model
+class EventoGrupo extends Model
 {
     use HasFactory;
 
@@ -21,4 +22,13 @@ class PgtoForma extends Model
     protected $fillable = [
         'nome', 'notas','ativo'
     ];
+
+    /**
+     * RELACIONAMENTO: O EventoArea 'tem muitas' (hasMany) Eventos. 
+     * Obtenha essa coleção de registros.
+     */
+    public function hasEventos(): HasMany
+    {
+        return $this->hasMany(Evento::class);
+    }
 }

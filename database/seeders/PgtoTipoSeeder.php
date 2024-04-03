@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\PgtoForma;
+use App\Models\PgtoTipo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PgtoFormaSeeder extends Seeder
+class PgtoTipoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -39,7 +39,7 @@ class PgtoFormaSeeder extends Seeder
         ];
     
         foreach ($items as $item) {
-            PgtoForma::create($item);
+            PgtoTipo::create($item);
         }
     }
 }

@@ -15,31 +15,34 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         //Roda somente uma Seeder específica. 
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(3)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        /* \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]); */
 
         // Roda um conjunto de Seeder.
         $this->call([
 
-            /* PgtoFormaSeeder::class,
+            /* PgtoTipoSeeder::class,
             StatusSeeder::class, */
 
             // Módulo Movimentos.
             //MovimentoGrupoSeeder::class,
             //MovimentoSeeder::class,
-            
+
             // Módulo fatura.
-            //FaturaGrupoSeeder::class,
-            //FaturaEmissoraSeeder::class,
-            FaturaSeeder::class,
-            //FaturaItemSeeder::class,
+            /* FaturaGrupoSeeder::class,
+            FaturaEmissoraSeeder::class, */
+            //FaturaSeeder::class,
+
+            // Múdulo Eventos
+            /* EventoGrupoSeeder::class,
+            EventoAreaSeeder::class,
+            EventoLocalSeeder::class, */
+            //EventoSeeder::class,
 
         ]);
-
-        
     }
 }
