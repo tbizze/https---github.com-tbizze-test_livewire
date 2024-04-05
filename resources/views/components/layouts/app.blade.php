@@ -91,8 +91,8 @@
                 </x-mary-menu-sub>
 
                 <x-mary-menu-sub title="Configurações" icon="o-cog-6-tooth">
-                    <x-mary-menu-item title="Categories" icon="o-square-3-stack-3d" :link="route('categories')" wire:navigate />
-                    <x-mary-menu-item title="Posts" icon="o-square-3-stack-3d" :link="route('posts')" wire:navigate.hover />
+                    <x-mary-menu-item title="Funções" icon="o-square-3-stack-3d" :link="route('admin.roles')" wire:navigate />
+                    <x-mary-menu-item title="Permissões" icon="o-square-3-stack-3d" :link="route('admin.permissions')" wire:navigate.hover />
                     
                     <x-mary-menu-item title="Wifi" icon="o-wifi" link="####" />
                     <x-mary-menu-item title="Archives" icon="o-archive-box" link="####" />

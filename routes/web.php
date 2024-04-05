@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\Admin\PermissionIndex;
+use App\Livewire\Admin\RoleIndex;
 use App\Livewire\CategoryIndex;
 use App\Livewire\Counter;
 use App\Livewire\DashboardIndex;
@@ -57,6 +59,9 @@ Route::middleware([
     Route::get('/evento/grupos', EventoGrupoIndex::class)->name('evento.grupos');
     Route::get('/evento/areas', EventoAreaIndex::class)->name('evento.areas');
     Route::get('/evento/locals', EventoLocalIndex::class)->name('evento.locals');
+    
+    Route::get('/admin/roles', RoleIndex::class)->name('admin.roles');
+    Route::get('/admin/permissions', PermissionIndex::class)->name('admin.permissions');
 });
 
 //Route::get('/test', Counter::class);

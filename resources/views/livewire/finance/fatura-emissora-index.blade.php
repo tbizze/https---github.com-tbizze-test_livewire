@@ -5,14 +5,18 @@
             <x-mary-input icon="o-magnifying-glass" placeholder="Search..." wire:model.live="search" />
         </x-slot:middle>
         <x-slot:actions>
+            @can('fatura.emissoras.create')
             <x-mary-button icon="o-plus" class="btn-primary" @click="$wire.showModalRegistro()" />
+            @endcan
         </x-slot:actions>
     </x-mary-header>
 
     {{-- Renderiza tabela --}}
     <x-mary-table :headers="$headers" :rows="$fatura_emissoras" striped @row-click="$wire.edit($event.detail.id)" with-pagination :sort-by="$sortBy">
         @scope('actions', $fatura_emissora)
+            @can('fatura.emissoras.delete')
             <x-mary-button icon="o-trash" wire:click="confirmDelete({{ $fatura_emissora->id }})" spinner class="btn-sm btn-outline border-none text-error p-1" />
+            @endcan
         @endscope
     </x-mary-table>
 
