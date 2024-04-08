@@ -1,7 +1,9 @@
 <?php
 
 use App\Livewire\Admin\PermissionIndex;
+use App\Livewire\Admin\RoleHasPermissionEdit;
 use App\Livewire\Admin\RoleIndex;
+use App\Livewire\Admin\UserToRoleIndex;
 use App\Livewire\CategoryIndex;
 use App\Livewire\Counter;
 use App\Livewire\DashboardIndex;
@@ -62,6 +64,8 @@ Route::middleware([
     
     Route::get('/admin/roles', RoleIndex::class)->name('admin.roles');
     Route::get('/admin/permissions', PermissionIndex::class)->name('admin.permissions');
+    Route::get('/admin/user-to-roles', UserToRoleIndex::class)->name('admin.user-to-roles');
+    Route::get('/admin/role-has-permissions/{role}/edit', RoleHasPermissionEdit::class)->name('admin.role-has-permissions');
 });
 
 //Route::get('/test', Counter::class);

@@ -45,7 +45,7 @@ class RoleIndex extends Component
                 return $query;
             })
             ->orderBy(...array_values($this->sortBy))
-            ->paginate(4);
+            ->paginate(10);
     }
 
     //* Método p/ Cabeçalho da tabela

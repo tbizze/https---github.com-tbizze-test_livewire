@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Mary\Traits\Toast;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionIndex extends Component
 {
@@ -32,6 +33,7 @@ class PermissionIndex extends Component
         return view('livewire.admin.permission-index',[
             'headers' => $this->headers(),
             'permissions' => $this->permissions(),
+            'roles' => Role::all(),
         ]);
     }
 
@@ -39,6 +41,7 @@ class PermissionIndex extends Component
     public function permissions()
     {
         return Permission::query()
+            ->withAggregate('roles', 'name')
             ->when($this->search, function ($query, $val) {
                 $query->where('name', 'like', '%' . $val . '%');
                 $query->orWhere('description', 'like', '%' . $val . '%');
@@ -57,6 +60,8 @@ class PermissionIndex extends Component
             ['key' => 'name', 'label' => 'Nome'],
             ['key' => 'description', 'label' => 'Descrição', 'sortable' => false],
             ['key' => 'model', 'label' => 'Modelo'],
+            ['key' => 'roles_name', 'label' => 'Grupo', 'sortBy' => 'roles_name'],
+
         ];
     }
 
@@ -72,11 +77,14 @@ class PermissionIndex extends Component
     // Método p/ salvar: STORE ou UPDATE
     public function save()
     {
+        //dd($this->registroEditMode);
         if ($this->registroEditMode) {
+            //dd('update');
             $this->form->update();
             $this->registroEditMode = false;
             $this->success('Registro salvo com sucesso!');
         } else {
+            //dd('store');
             $this->form->store();
             $this->success('Registro incluído com sucesso!');
         }
