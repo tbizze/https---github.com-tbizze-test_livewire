@@ -73,8 +73,8 @@
             <x-mary-menu activate-by-route>
                 <x-mary-menu-item title="Home" icon="o-home" link="/dashboard" />
                 
-                <x-mary-menu-item title="Faturas" icon="o-document-text" :link="route('faturas')" wire:navigate.hover />
-                <x-mary-menu-item title="Movimentos" icon="c-inbox" :link="route('movimentos')" wire:navigate.hover />
+                <x-mary-menu-item title="Faturas" icon="o-document-text" :link="route('faturas.index')" wire:navigate.hover />
+                <x-mary-menu-item title="Movimentos" icon="c-inbox" :link="route('movimentos.index')" wire:navigate.hover />
 
                 <x-mary-menu-sub title="Eventos" icon="m-adjustments-horizontal">
                     <x-mary-menu-item title="Evento grupos" icon="m-arrow-small-right" :link="route('evento.grupos')" wire:navigate.hover />
@@ -83,11 +83,11 @@
                 </x-mary-menu-sub>
 
                 <x-mary-menu-sub title="Recursos" icon="m-adjustments-horizontal">
-                    <x-mary-menu-item title="Fatura grupos" icon="m-arrow-small-right" :link="route('fatura.grupos')" wire:navigate.hover />
-                    <x-mary-menu-item title="Fatura emissores" icon="m-arrow-small-right" :link="route('fatura.emissoras')" wire:navigate.hover />
-                    <x-mary-menu-item title="Movimento grupos" icon="m-arrow-small-right" :link="route('movimento.grupos')" wire:navigate.hover />
-                    <x-mary-menu-item title="Tipos pgtos" icon="m-arrow-small-right" :link="route('admin.pgto_tipos')" wire:navigate.hover />
-                    <x-mary-menu-item title="Status" icon="m-arrow-small-right" :link="route('admin.status')" wire:navigate.hover />
+                    <x-mary-menu-item title="Fatura grupos" icon="m-arrow-small-right" :link="route('fatura.grupos.index')" wire:navigate.hover />
+                    <x-mary-menu-item title="Fatura emissores" icon="m-arrow-small-right" :link="route('fatura.emissoras.index')" wire:navigate.hover />
+                    <x-mary-menu-item title="Movimento grupos" icon="m-arrow-small-right" :link="route('movimento.grupos.index')" wire:navigate.hover />
+                    <x-mary-menu-item title="Tipos pgtos" icon="m-arrow-small-right" :link="route('admin.pgto_tipos.index')" wire:navigate.hover />
+                    <x-mary-menu-item title="Status" icon="m-arrow-small-right" :link="route('admin.status.index')" wire:navigate.hover />
                 </x-mary-menu-sub>
 
                 <x-mary-menu-sub title="Configurações" icon="o-cog-6-tooth">

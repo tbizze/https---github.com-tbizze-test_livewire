@@ -15,7 +15,7 @@
                 </x-mary-list-item>
             @endforeach
             <x-slot:actions>
-                <x-mary-button label="Ver todos" class=" btn-secondary btn-sm" link="{{ route('movimentos') }}" spinner="save" />
+                <x-mary-button label="Ver todos" class=" btn-secondary btn-sm" link="{{ route('movimentos.index') }}" spinner="save" />
             </x-slot:actions>
         </x-mary-card>
 
@@ -34,7 +34,7 @@
                 </x-mary-list-item>
             @endforeach
             <x-slot:actions>
-                <x-mary-button label="Ver todos" class=" btn-secondary btn-sm" link="{{ route('movimentos') }}" spinner="save" />
+                <x-mary-button label="Ver todos" class=" btn-secondary btn-sm" link="{{ route('movimentos.index') }}" spinner="save" />
             </x-slot:actions>
         </x-mary-card>
 

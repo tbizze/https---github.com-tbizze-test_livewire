@@ -15,7 +15,7 @@
     <x-mary-table :headers="$headers" :rows="$fatura_emissoras" striped @row-click="$wire.edit($event.detail.id)" with-pagination :sort-by="$sortBy">
         @scope('actions', $fatura_emissora)
             @can('fatura.emissoras.delete')
-            <x-mary-button icon="o-trash" wire:click="confirmDelete({{ $fatura_emissora->id }})" spinner class="btn-sm btn-outline border-none text-error p-1" />
+                <x-mary-button icon="o-trash" wire:click="confirmDelete({{ $fatura_emissora->id }})" spinner class="btn-sm btn-outline border-none text-error p-1" />
             @endcan
         @endscope
     </x-mary-table>
@@ -29,7 +29,9 @@
 
             <x-slot:actions>
                 <x-mary-button label="Cancel" @click="$wire.modalRegistro = false" />
-                <x-mary-button label="Salvar" class="btn-primary" type="submit" spinner="save" />
+                @can('fatura.emissoras.edit')
+                    <x-mary-button label="Salvar" class="btn-primary" type="submit" spinner="save" />
+                @endcan
             </x-slot:actions>
         </x-mary-form>
     </x-mary-modal>

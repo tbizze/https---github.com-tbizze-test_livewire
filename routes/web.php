@@ -49,29 +49,32 @@ Route::middleware([
     Route::get('/posts', PostIndex::class)->name('posts');
     Route::get('/categories', CategoryIndex::class)->name('categories');
 
-    Route::get('/fatura/emissoras', FaturaEmissoraIndex::class)->name('fatura.emissoras');
-    Route::get('/fatura/grupos', FaturaGrupoIndex::class)->name('fatura.grupos');
-    Route::get('/movimento/grupos', MovimentoGrupoIndex::class)->name('movimento.grupos');
-    Route::get('/admin/status', StatusIndex::class)->name('admin.status');
-    Route::get('/admin/pgto_tipos', PgtoTipoIndex::class)->name('admin.pgto_tipos');
+    Route::get('/fatura/emissoras', FaturaEmissoraIndex::class)->name('fatura.emissoras.index')->middleware('permission:fatura.emissoras.index');
+    Route::get('/fatura/grupos', FaturaGrupoIndex::class)->name('fatura.grupos.index')->middleware('permission:fatura.grupos.index');
+    Route::get('/movimento/grupos', MovimentoGrupoIndex::class)->name('movimento.grupos.index')->middleware('permission:movimento.grupos.index');
+
+    Route::get('/admin/status', StatusIndex::class)->name('admin.status.index')->middleware('permission:admin.status.index');
+    Route::get('/admin/pgto_tipos', PgtoTipoIndex::class)->name('admin.pgto_tipos.index')->middleware('permission:admin.pgto_tipos.index');
     
-    Route::get('/movimentos', MovimentoIndex::class)->name('movimentos');
-    Route::get('/faturas', FaturaIndex::class)->name('faturas');
+    Route::get('/movimentos', MovimentoIndex::class)->name('movimentos.index')->middleware('permission:movimentos.index');
+    Route::get('/faturas', FaturaIndex::class)->name('faturas.index')->middleware('permission:faturas.index');
 
     Route::get('/evento/grupos', EventoGrupoIndex::class)->name('evento.grupos');
     Route::get('/evento/areas', EventoAreaIndex::class)->name('evento.areas');
     Route::get('/evento/locals', EventoLocalIndex::class)->name('evento.locals');
     
-    Route::get('/admin/roles', RoleIndex::class)->name('admin.roles');
-    Route::get('/admin/permissions', PermissionIndex::class)->name('admin.permissions');
-    Route::get('/admin/user-to-roles', UserToRoleIndex::class)->name('admin.user-to-roles');
-    Route::get('/admin/role-has-permissions/{role}/edit', RoleHasPermissionEdit::class)->name('admin.role-has-permissions');
+    Route::group(['middleware' => ['role:Admin']], function () { 
+        Route::get('/admin/roles', RoleIndex::class)->name('admin.roles');
+        Route::get('/admin/permissions', PermissionIndex::class)->name('admin.permissions');
+        Route::get('/admin/user-to-roles', UserToRoleIndex::class)->name('admin.user-to-roles');
+        Route::get('/admin/role-has-permissions/{role}/edit', RoleHasPermissionEdit::class)->name('admin.role-has-permissions');
+    });
+    /* Route::group(['prefix' => 'admin', 'middleware' => ['role:Admin']], function() {
+
+        
+     }); */
+
+    
+    /* Route::get('/admin/role-has-permissions/{role}/edit', RoleHasPermissionEdit::class,
+    ['middleware' => 'can:editPost,post'])->name('admin.role-has-permissions'); */
 });
-
-//Route::get('/test', Counter::class);
-
-/* Route::get('/ver', function () {
-    $dados = \App\Models\Post::all();
-    dd($dados->toArray());
-    //return view('welcome');
-}); */

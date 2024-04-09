@@ -10,7 +10,9 @@
                     <x-mary-badge :value="$qdeFilter" class="badge-error absolute -right-2 -top-2" />
                 @endif
             </x-mary-button>
-            <x-mary-button icon="o-plus" class="btn-primary" @click="$wire.showModalRegistro()" />
+            @can('movimentos.create')
+                <x-mary-button icon="o-plus" class="btn-primary" @click="$wire.showModalRegistro()" />
+            @endcan
         </x-slot:actions>
     </x-mary-header>
 
@@ -32,10 +34,14 @@
             {{-- Monta coluna de ações  --}}
             @scope('actions', $movimento)
                 <div class="flex gap-1">
+                    @can('movimentos.edit')
                     <x-mary-button icon="o-document-duplicate" wire:click="copyRecord({{ $movimento->id }})" spinner
                         class="btn-sm btn-outline border-none p-1" />
-                    <x-mary-button icon="o-trash" wire:click="confirmDelete({{ $movimento->id }})" spinner
-                        class="btn-sm btn-outline border-none text-error p-1" />
+                    @endcan
+                    @can('movimentos.delete')
+                        <x-mary-button icon="o-trash" wire:click="confirmDelete({{ $movimento->id }})" spinner
+                            class="btn-sm btn-outline border-none text-error p-1" />
+                    @endcan
                 </div>
             @endscope
         </x-mary-table>
@@ -77,7 +83,9 @@
 
             <x-slot:actions>
                 <x-mary-button label="Cancel" @click="$wire.modalRegistro = false" />
-                <x-mary-button label="Salvar" class="btn-primary" type="submit" spinner="save" />
+                @can('movimentos.edit')
+                    <x-mary-button label="Salvar" class="btn-primary" type="submit" spinner="save" />
+                @endcan
             </x-slot:actions>
         </x-mary-form>
     </x-mary-modal>
