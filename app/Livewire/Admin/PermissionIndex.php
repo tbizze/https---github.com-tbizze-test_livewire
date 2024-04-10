@@ -112,4 +112,15 @@ class PermissionIndex extends Component
         $this->form->reset();
         $this->modalRegistro = true;
     }
+
+    // Método p/ carregar inputs do form.
+    // Mas não carrega o modelo, para que ao salvar faça STORE()
+    // Por isso registroEditMode = false
+    public function copyRecord($id)
+    {
+        $registro = Permission::find($id);
+        $this->form->setRegistro($registro);
+        $this->registroEditMode = false;
+        $this->modalRegistro = true;
+    }
 }

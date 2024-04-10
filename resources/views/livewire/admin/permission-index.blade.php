@@ -24,10 +24,16 @@
                 </div>
             @endscope
             @scope('actions', $permission)
+            <div class="flex gap-1">
+                @can('movimentos.edit')
+                <x-mary-button icon="o-document-duplicate" wire:click="copyRecord({{ $permission->id }})" spinner
+                    class="btn-sm btn-outline border-none p-1" />
+                @endcan
                 @can('admin.permissions.delete')
                     <x-mary-button icon="o-trash" wire:click="confirmDelete({{ $permission->id }})" spinner
                         class="btn-sm btn-outline border-none text-error p-1" />
                 @endcan
+            </div>
             @endscope
         </x-mary-table>
     </x-mary-card>
